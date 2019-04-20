@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+  <body>
+    <button id="auth-btn" type="submit" class="mod-primary">Authorize Andrello to Access Trello</button>
+    <script>
+      window.Promise = TrelloPowerUp.Promise;
+      var t = TrelloPowerUp.iframe();
+
+      var trelloAuthUrl = 'https://trello.com/1/authorize?';
+
+      // you'll want to update these for your own app :)
+      var authParams = {
+        name: 'Andrello',
+        expiration: 'never',
+        scope: 'read,write',
+        key: 'e5de33d6f9b24c5f1e5522b2d76dbf57',
+        callback_method: 'fragment',
+        return_url: 'https://' + window.location.host + '/auth-success.html',
+      };
+
+      var params = Object.keys(authParams);
+      params.forEach(function(param) {
+        trelloAuthUrl += param + '=' + encodeURIComponent(authParams[param]) + '&';
+      });
+
+      var tokenLooksValid = function(token) {
+        return /^[0-9a-f]{64}$/.test(token);
+      }
+
+      document.getElementById('auth-btn').addEventListener('click', function(){
+        t.authorize(trelloAuthUrl, { height: 680, width: 580, validToken: tokenLooksValid })
+        .then(function(token){
+          
+          // send the token and board to Andrello server
+          // TODO
+          // ...
+          
+          // store the token in Trello private Power-Up storage
+          return t.set('member', 'private', 'token', token)
+        });
+      });
+    </script>
+  </body>
+</html>

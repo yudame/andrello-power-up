@@ -1,0 +1,30 @@
+{
+  "name": "Andrello-Power-Up",
+  "version": "0.1.1",
+  "description": "A Trello Power-Up that allows you to publish content to your Andrello website.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "compression": "1.6.2",
+    "express": "^4.16.4",
+    "cors": "^2.8.5",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "body-parser": "^1.15.2"
+  },
+  "engines": {
+    "node": "6.10.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/andrello"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
