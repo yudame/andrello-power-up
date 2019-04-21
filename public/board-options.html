@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <style>
+      select { height: 30px; }
+    </style>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+  <body>
+    <form id="settings">
+      <label for="estimate">URL slug:</label>
+      <input type="text" id="slug" name="slug">
+      <button type="submit" class="mod-primary">Save</button>
+    </form>
+    <script>
+      
+/* global TrelloPowerUp */
+
+var t = TrelloPowerUp.iframe();
+
+// Elements with IDs are available as properties of `window`.
+window.estimate.addEventListener('submit', function(event){
+  // Stop the browser trying to submit the form itself.
+  event.preventDefault();
+  return t.set('card', 'shared', 'slug', window.slug.value)
+  .then(function(){
+    t.closePopup();
+  });
+});
+
+t.render(function(){
+  return t.get('card', 'shared', 'slug')
+  .then(function(estimate){
+    window.slug.value = slug;
+  })
+  .then(function(){
+    t.sizeTo('#estimate').done();
+  });
+});
+      
+    </script>
+  </body>
+</html>
